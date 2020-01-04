@@ -43,13 +43,31 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/Pngs_Flat_0003_Bird_Shine_Color_Dodge.png
     - assets/images/texture.png
-    - assets/images/000_branch.png
-    - assets/images/001_branch.png
-    - assets/images/01_branch.png
-    - assets/images/leaf_1.png
-    - assets/images/leaf_2.png
-    - assets/images/leaf_3.png
+
+    - assets/images/Pngs_Flat_0007_F_B_Left.png
+    - assets/images/Pngs_Flat_0008_F_B_Left_2.png
+    - assets/images/Pngs_Flat_0004_F_Leaf_L_1.png
+    - assets/images/Pngs_Flat_0005_F_Leaf_L_2.png
+    - assets/images/Pngs_Flat_0006_F_Leaf_L_3.png
+
+    - assets/images/Pngs_Flat_0033_B_Br_Left.png
+    - assets/images/Pngs_Flat_0034_B_Br_Left_1.png
+    - assets/images/Pngs_Flat_0032_B_Leaf_L_1.png
+    - assets/images/Pngs_Flat_0031_B_Leaf_L_2.png
+    - assets/images/Pngs_Flat_0030_B_Leaf_L_3.png
+    - assets/images/Pngs_Flat_0029_B_leaf_L_4.png
+    - assets/images/Pngs_Flat_0028_B_Leaf_L_5.png
+    - assets/images/Pngs_Flat_0027_B_Leaf_L_6.png
+
+    - assets/images/Pngs_Flat_0014_F_B_Right.png
+    - assets/images/Pngs_Flat_0015_F_B_Right_2.png
+    - assets/images/Pngs_Flat_0013_F_Leaf_R_5.png
+    - assets/images/Pngs_Flat_0012_F_Leaf_R_4.png
+    - assets/images/Pngs_Flat_0011_F_Leaf_R_3.png
+    - assets/images/Pngs_Flat_0010_F_Leaf_R_2.png
+    - assets/images/Pngs_Flat_0009_F_Leaf_R_1.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
