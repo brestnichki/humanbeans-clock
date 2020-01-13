@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:supernova_flutter_ui_toolkit/keyframes.dart';
 
-Animation<double> setupRotation(AnimationController controller, List<Keyframe<double>> keyframes, Interval interval) {
+Animation<double> setupRotation(AnimationController controller) {
   return
     Interpolation(
-        keyframes: keyframes
+        keyframes: [
+          Keyframe<double>(fraction: 0, value: 0),
+          Keyframe<double>(fraction: 0.999, value: 3.6),
+          Keyframe<double>(fraction: 1, value: 0),
+        ]
     ).animate(
         CurvedAnimation(
             parent: controller,
-            curve: interval
+            curve: Interval(
+                0, 0.5, curve: Curves.easeOut
+            )
         )
     );
 }
 
-Animation<double> setupTranslationX(AnimationController controller){
+Animation<double> setupTranslationX(AnimationController controller, bool toRight){
   return
     Interpolation(
       keyframes: [
         Keyframe<double>(fraction: 0, value: 0),
-        Keyframe<double>(fraction: 0.999, value: 800),
+        Keyframe<double>(fraction: 0.999, value: (800 * (toRight ? 1 : - 1 )).toDouble()),
         Keyframe<double>(fraction: 1, value: 0),
       ]
     ).animate(
@@ -31,12 +37,12 @@ Animation<double> setupTranslationX(AnimationController controller){
     );
 }
 
-Animation<double> setupTranslationY(AnimationController controller){
+Animation<double> setupTranslationY(AnimationController controller, bool toRight){
   return
     Interpolation(
         keyframes: [
           Keyframe<double>(fraction: 0, value: 0),
-          Keyframe<double>(fraction: 0.999, value: -480),
+          Keyframe<double>(fraction: 0.999, value: 10.0),
           Keyframe<double>(fraction: 1, value: 0),
         ]
     ).animate(
@@ -61,7 +67,7 @@ Animation<double> setupScaleX(AnimationController controller){
         CurvedAnimation(
             parent: controller,
             curve: Interval(
-                0.5, 1, curve: Curves.easeOutQuad
+                0.49, 1, curve: Curves.easeOutQuad
             )
         )
     );
@@ -79,26 +85,7 @@ Animation<double> setupScaleY(AnimationController controller){
         CurvedAnimation(
             parent: controller,
             curve: Interval(
-                0.5, 1, curve: Curves.easeOutQuad
-            )
-        )
-    );
-}
-
-Animation<double> setupOpacity(AnimationController controller){
-  return
-    Interpolation(
-        keyframes: [
-          Keyframe<double>(fraction: 0, value: 1),
-          Keyframe<double>(fraction: 0.001, value: 0),
-          Keyframe<double>(fraction: 0.999, value: 0),
-          Keyframe<double>(fraction: 1, value: 1),
-        ]
-    ).animate(
-        CurvedAnimation(
-            parent: controller,
-            curve: Interval(
-                0.49, 0.51, curve: Curves.easeOutQuad
+                0.49, 1, curve: Curves.easeOutQuad
             )
         )
     );
@@ -107,24 +94,21 @@ Animation<double> setupOpacity(AnimationController controller){
 
 
 class LeafAnimation extends StatelessWidget {
+  final bool isActive;
 
   LeafAnimation({
     Key key,
     this.child,
     this.transformOrigin = const FractionalOffset(0, 0),
-    @required AnimationController idleController,
+    bool toRight = true,
     @required AnimationController activeController,
-    @required List<Keyframe<double>> keyframes,
-    @required Interval interval
-  }) :  assert( idleController != null ),
-        assert( keyframes != null && keyframes.length > 0),
-        assert( interval != null ),
-        this.rotation = setupRotation(idleController, keyframes, interval),
-        this.translationX = activeController != null ? setupTranslationX(activeController) : null,
-        this.translationY = activeController != null ? setupTranslationY(activeController): null,
-        this.scaleX = activeController != null ? setupScaleX(activeController) : null,
-        this.scaleY = activeController != null ? setupScaleY(activeController) : null,
-        this.opacity = activeController != null ? setupOpacity(activeController) : null,
+    @required this.isActive
+  }) :  assert( activeController != null ),
+        this.rotation = isActive ? setupRotation(activeController) : null,
+        this.translationX = isActive ? setupTranslationX(activeController, toRight) : null,
+        this.translationY = isActive ? setupTranslationY(activeController, toRight) : null,
+        this.scaleX = isActive ? setupScaleX(activeController) : null,
+        this.scaleY = isActive ? setupScaleY(activeController) : null,
         super(key: key);
 
   final Animation<double> rotation;
@@ -132,52 +116,43 @@ class LeafAnimation extends StatelessWidget {
   final Animation<double> translationY;
   final Animation<double> scaleX;
   final Animation<double> scaleY;
-  final Animation<double> opacity;
   final Alignment transformOrigin;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    var activeAnimatedBuilder = AnimatedBuilder(
-      animation: Listenable.merge([
-        this.translationX,
-        this.translationY,
-        this.scaleX,
-        this.scaleY,
-        this.opacity
-      ]),
-      child: this.child,
-      builder: (context, widget){
-        return Transform.translate(
-            offset: Offset(
-                this.translationX.value,
-                this.translationY.value
-            ),
-            child: Transform(
-                alignment: this.transformOrigin,
-                transform: Matrix4.diagonal3Values(this.scaleX.value, this.scaleY.value, 1.0),
-                child: Opacity(
-                    opacity: this.opacity.value,
-                    child: widget
+    if(this.isActive) {
+      return
+        AnimatedBuilder(
+          animation: Listenable.merge([
+            this.rotation,
+            this.translationX,
+            this.translationY,
+            this.scaleX,
+            this.scaleY,
+          ]),
+          child: this.child,
+          builder: (context, widget) {
+            return Transform(
+                transform: Matrix4.translationValues(
+                    this.translationX.value,
+                    this.translationY.value,
+                    0
                 )
-            )
+                  ..scale(
+                      this.scaleX.value,
+                      this.scaleY.value
+                  )
+                  ..rotateZ(
+                      this.rotation.value
+                  ),
+                alignment: this.transformOrigin,
+                child: widget
+            );
+          },
         );
-      },
-    );
-
-
-    return AnimatedBuilder(
-      animation: Listenable.merge([
-        this.rotation
-      ]),
-      child: this.translationX == null ? this.child : activeAnimatedBuilder,
-      builder: (context, widget){
-        return Transform.rotate(
-          alignment: this.transformOrigin,
-          angle: this.rotation.value,
-          child: widget,
-        );
-      },
-    );
+    } else {
+      return this.child;
+    }
   }
 }

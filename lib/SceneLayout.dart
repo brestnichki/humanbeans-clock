@@ -1,45 +1,42 @@
-import 'package:clock/BirdAnimation.dart';
+
+import 'dart:ui';
+
+import 'package:clock/ClockUiInheritedModel.dart';
+import 'package:clock/TexturePainter.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'LayersLayout.dart';
 
-class SceneLayout extends StatefulWidget {
-  final bool imagesLoaded;
-  final String minutes;
-  final String seconds;
+class SceneLayout extends StatelessWidget {
 
-  SceneLayout({ this.imagesLoaded, this.minutes, this.seconds});
-
-  @override
-  _SceneLayoutState createState() => _SceneLayoutState();
-}
-
-class _SceneLayoutState extends State<SceneLayout> with SingleTickerProviderStateMixin{
-  AnimationController _birdAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _birdAnimation = AnimationController(
-      duration: Duration(seconds: 2),
-      vsync: this
-    );
-  }
+  const SceneLayout({ Key key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if(widget.imagesLoaded){
-      return BirdAnimation(
-        animationController: _birdAnimation,
-        child: LayersLayout(
-            minutes: widget.minutes,
-            seconds: widget.seconds
-        ),
-      );
-    } else {
-      return LayersLayout(
-          minutes: widget.minutes,
-          seconds: widget.seconds
-      );
-    }
+      return
+      Center(
+        child: AspectRatio(
+          aspectRatio: 5 / 3,
+          child: FutureBuilder(
+            future: ClockUiInheritedModel.of(context, 'imagesFuture').imagesFuture,
+            builder: (BuildContext c, AsyncSnapshot<List<Image>> snapshot){
+              if(snapshot.connectionState == ConnectionState.done){
+                return
+                  CustomPaint(
+                    foregroundPainter: TexturePainter(
+                      screenTexture: snapshot.data[1],
+                      multiplyTexture: snapshot.data[2],
+                    ),
+                    child: const LayersLayout(),
+                  );
+              } else {
+                return
+                  Center(
+                    child: const Text('Just a sec!'),
+                  );
+              }
+          }
+        )
+      )
+    );
   }
 }

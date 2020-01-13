@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
   intl: ^0.16.0
   supernova_flutter_ui_toolkit: ^0.0.2
+  flare_flutter: ^1.8.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -43,8 +44,12 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/rive/Bird_Final_2.flr
+    - assets/rive/Light_Final.flr
+
     - assets/images/Pngs_Flat_0003_Bird_Shine_Color_Dodge.png
-    - assets/images/texture.png
+    - assets/images/Pngs_Flat_0001_Texture_Screen.png
+    - assets/images/Pngs_Flat_0002_Texture_Multiply.png
 
     - assets/images/Pngs_Flat_0007_F_B_Left.png
     - assets/images/Pngs_Flat_0008_F_B_Left_2.png
@@ -68,6 +73,15 @@ flutter:
     - assets/images/Pngs_Flat_0011_F_Leaf_R_3.png
     - assets/images/Pngs_Flat_0010_F_Leaf_R_2.png
     - assets/images/Pngs_Flat_0009_F_Leaf_R_1.png
+
+    - assets/images/Pngs_Flat_0035_B_Br_right.png
+    - assets/images/Pngs_Flat_0036_B_Br_Right_1.png
+    - assets/images/Pngs_Flat_0037_B_Br_right_2.png
+    - assets/images/Pngs_Flat_0022_B_Leaf_R_5.png
+    - assets/images/Pngs_Flat_0023_B_Leaf_R_4.png
+    - assets/images/Pngs_Flat_0024_B_Leaf_R_3.png
+    - assets/images/Pngs_Flat_0025_B_Leaf_R_2.png
+    - assets/images/Pngs_Flat_0026_B_Leaf_R_1.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

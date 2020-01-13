@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 double calculateRatio(context){
-  double width = MediaQuery.of(context).size.width;
-  double height = MediaQuery.of(context).size.height;
+  Size size = MediaQuery.of(context).size;
 
-  double biggerSize = width > height ? width : height;
+  double smallerSize = size.width < size.height ? size.width : size.height;
 
-  return biggerSize / 800;
+  return (smallerSize / 3 * 5) / 800;
 }
 
 class Utils {

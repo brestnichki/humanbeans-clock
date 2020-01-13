@@ -1,60 +1,55 @@
 import 'package:clock/BranchesLayout.dart';
+import 'package:clock/ClockUiInheritedModel.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class LayersLayout extends StatelessWidget {
-  final String minutes;
-  final String seconds;
-  final TextStyle _secondsStyle = TextStyle(
+  static const TextStyle _secondsStyle = const TextStyle(
       fontSize: 24,
       color: Color.fromRGBO(217, 136, 136, 1)
   );
 
-  final TextStyle _minutesStyle = TextStyle(
+  static const TextStyle _minutesStyle = const TextStyle(
       fontSize: 36,
       color: Color.fromRGBO(217, 136, 136, 1)
   );
 
-  LayersLayout({Key key, this.minutes, this.seconds}) : super(key: key);
+  const LayersLayout({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-        children: [
-          Stack(
-              children: <Widget>[
-                Container(
-                  color: Color.fromRGBO(14, 39, 88, 1),
-                  constraints: BoxConstraints.expand(),
-                  child: Center(
-                    child: RichText(
-                        text: TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: minutes,
-                                  style: _minutesStyle
-                              ),
-                              TextSpan(
-                                  text: ":",
-                                  style: _minutesStyle
-                              ),
-                              TextSpan(
-                                  text: seconds,
-                                  style: _secondsStyle
-                              )
-                            ]
+        children: <Widget>[
+          Container(
+            color: const Color.fromRGBO(14, 39, 88, 1),
+            constraints: const BoxConstraints.expand(),
+            child: Center(
+              child: RichText(
+                  text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: ClockUiInheritedModel.of(context, 'minutes').minutes,
+                            style: _minutesStyle
+                        ),
+                        const TextSpan(
+                            text: ":",
+                            style: _minutesStyle
+                        ),
+                        TextSpan(
+                            text: ClockUiInheritedModel.of(context, 'seconds').seconds,
+                            style: _secondsStyle
                         )
-                    ),
-                  ),
-                ),
-                BranchesLayout(),
-                Container(
-                  constraints: BoxConstraints.expand(),
-                  child: Image.asset(
-                    'assets/images/texture.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ]
+                      ]
+                  )
+              ),
+            ),
+          ),
+          const BranchesLayout(),
+          FlareActor(
+            'assets/rive/Light_Final.flr',
+            controller: ClockUiInheritedModel.of(context, 'birdControls').haloControls,
+            fit: BoxFit.contain,
+            shouldClip: true,
           ),
         ]
     );
