@@ -10,6 +10,7 @@ import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'ClockUiInheritedModel.dart';
 import 'dart:ui' as ui;
 
@@ -21,6 +22,7 @@ class Clock extends StatefulWidget {
 
 class _ClockState extends State<Clock> with TickerProviderStateMixin{
   DateTime _dateTime;
+  DateTime _birdTime;
   Timer _timer;
   Future<List<Image>> _imagesFuture;
 
@@ -63,22 +65,15 @@ class _ClockState extends State<Clock> with TickerProviderStateMixin{
     );
 
     _birdControls = BirdController(
-      playNext: (){
-        _birdControls.play(_birdAnimations.getFlyOut());
-        _haloControls.play(_birdAnimations.getFlyOut());
-      },
-      onEnd: (){
-        _idleAnimation.reset();
-        _idleAnimation.addStatusListener(_idleAnimationListener);
-        _idleAnimation.forward().orCancel;
-      }
+      onAnimationEnd: _birdAnimationListener
     );
     _haloControls = FlareControls();
 
     _idleAnimation.addStatusListener(_idleAnimationListener);
-    _idleAnimation.forward();
+    _idleAnimation.forward().orCancel;
 
     _updateTime();
+    _getBirdTime();
   }
 
   @override
@@ -126,13 +121,12 @@ class _ClockState extends State<Clock> with TickerProviderStateMixin{
     setState(() {
       _dateTime = DateTime.now();
 
-      if(_dateTime.second % 20 == 0){
-//        _activeAnimation.reset();
-//        _activeAnimation.forward().orCancel;
-//        _activeAnimationWidgetIndex = Random().nextInt(18);
 
+      print(_birdTime);
+
+      if(_birdTime != null && _dateTime.isAfter(_birdTime) && _dateTime.second == 0){
         _idleAnimation.removeStatusListener(_idleAnimationListener);
-        _idleAnimation.addStatusListener(_birdAnimationListener);
+        _idleAnimation.addStatusListener(_lastIdleAnimationListener);
       }
 
        _timer = Timer(
@@ -149,13 +143,65 @@ class _ClockState extends State<Clock> with TickerProviderStateMixin{
     }
   }
 
-  void _birdAnimationListener(status){
+  void _lastIdleAnimationListener(status){
     if(status == AnimationStatus.completed){
-      _idleAnimation.removeStatusListener(_birdAnimationListener);
+      _idleAnimation.removeStatusListener(_lastIdleAnimationListener);
       _birdControls.play(_birdAnimations.getFlyIn());
       _haloControls.play(_birdAnimations.getFlyIn());
+      _setBirdTime();
     }
   }
+
+  void _birdAnimationListener(name){
+    if(name == _birdAnimations.getFlyOut()) {
+      _idleAnimation.reset();
+      _idleAnimation.addStatusListener(_idleAnimationListener);
+      _idleAnimation
+          .forward()
+          .orCancel;
+    } else {
+      String nextAnimationName = _birdAnimations.getRandom(30 - _dateTime.second);
+      print(nextAnimationName);
+
+      if(nextAnimationName != null){
+        _birdControls.play(nextAnimationName);
+      } else {
+        _birdControls.play(_birdAnimations.getFlyOut());
+        _haloControls.play(_birdAnimations.getFlyOut());
+      }
+    }
+  }
+
+  void _getBirdTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int birdTimeMillis = prefs.getInt('birdTimeInMill');
+    if(birdTimeMillis != null &&
+        DateTime.now().isBefore(DateTime.fromMillisecondsSinceEpoch(birdTimeMillis))){
+      _birdTime = DateTime.fromMillisecondsSinceEpoch(birdTimeMillis);
+    } else {
+      await _setBirdTime();
+      _getBirdTime();
+    }
+  }
+
+  void _setBirdTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    DateTime now = DateTime.now();
+
+    DateTime nextBirdTime = DateTime(now.year, now.month, now.day, now.hour, now.minute)
+      ..add(Duration(minutes: 1));
+
+
+//
+//    DateTime nextBirdTime = DateTime(now.year, now.month, now.day)
+//      ..add(Duration(days: 1))
+//      ..add(Duration(hours: Random().nextInt(23)))
+//      ..add(Duration(minutes: Random().nextInt(60)));
+
+    prefs.setInt('birdTimeInMill', nextBirdTime.millisecondsSinceEpoch);
+  }
+
+
 
   Future<Image> _loadImage(AssetBundleImageKey key) async {
     final ByteData data = await key.bundle.load(key.name);

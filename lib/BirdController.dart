@@ -1,20 +1,13 @@
-import 'package:clock/BirdAnimations.dart';
 import 'package:flare_flutter/flare_controls.dart';
 
 class BirdController extends FlareControls{
-  final Function playNext;
-  final Function onEnd;
-  final BirdAnimations _birdAnimations = BirdAnimations();
+  final Function onAnimationEnd;
 
-  BirdController({ this.onEnd, this.playNext });
+  BirdController({ this.onAnimationEnd });
 
   @override
   void onCompleted(String name) {
-    if(name == _birdAnimations.getFlyIn()) {
-      this.playNext();
-    } else {
-      this.onEnd();
-    }
+    this.onAnimationEnd(name);
     super.onCompleted(name);
   }
 }
