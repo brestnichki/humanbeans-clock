@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:supernova_flutter_ui_toolkit/keyframes.dart';
 
+// Funciton that returns animation used by the animation builder
+//
+// [controller] is the [AnimationController] that controls the animation.
+// [keyframes] is the list of breakpoints for the animation
+// [interpolation] is used to orchestrate the staggered animations
 Animation<double> setupRotationZ(AnimationController controller, List<Keyframe<double>> keyframes, Interval interval) {
   return
     Interpolation(
@@ -13,7 +18,9 @@ Animation<double> setupRotationZ(AnimationController controller, List<Keyframe<d
     );
 }
 
-
+// Class that wraps it's child in the [AnimationBuilder] to play the "Idle Animation"
+//
+// The class creates it's animation and builds the [AnimationBuilder]
 class BranchAnimation extends StatelessWidget {
 
   BranchAnimation({
@@ -29,13 +36,17 @@ class BranchAnimation extends StatelessWidget {
         this.rotationZ = setupRotationZ(animationController, keyframes, interval),
         super(key: key);
 
+  // The animation of rotation of the branch
   final Animation<double> rotationZ;
+  // Origin of the roration
   final Alignment transformOrigin;
+  // The child to be used in the [AnimationBuilder]
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
+      // Listen for the animation value to change
       animation: Listenable.merge([
         this.rotationZ
       ]),

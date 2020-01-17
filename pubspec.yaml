@@ -85,6 +85,7 @@ flutter:
     - assets/images/Pngs_Flat_0025_B_Leaf_R_2.png
     - assets/images/Pngs_Flat_0026_B_Leaf_R_1.png
 
+    - assets/images/Loading_Screen.png
     - assets/images/Dots.png
 
   fonts:

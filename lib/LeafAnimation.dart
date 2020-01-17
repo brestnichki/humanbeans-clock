@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:supernova_flutter_ui_toolkit/keyframes.dart';
 
+// Functions returning the animations for the [Leaf] active animation
+//
+// They accept the controller as argument and have preset values for the
+// [Interpolation] and [Interval].
+// During the 'active animation' of the leaf, the 'idle animation' continues.
 Animation<double> setupRotation(AnimationController controller) {
   return
     Interpolation(
@@ -92,10 +97,19 @@ Animation<double> setupScaleY(AnimationController controller){
 }
 
 
-
+// Class building the [AnimationBuilder] for the 'active animation' of the [Leaf]
+//
+// Most of the time this widget is not animating, so if there's no [LeafAniamtion.isActive] flag
+// true, it builds just the child. When it gets rebuilded with [LeafAniamtion.isActive] flag true,
+// it builds the [AnimationController] and plays the animation.
 class LeafAnimation extends StatelessWidget {
+  // Flag indicating if this widget will animate on this time iteration
   final bool isActive;
 
+  // Constructor that creates the animations if [this.isActive] is true,
+  //
+  // Otherwise, if [this.isActive] is false, we don't need those values,
+  // and we assign them to null
   LeafAnimation({
     Key key,
     this.child,
@@ -111,16 +125,19 @@ class LeafAnimation extends StatelessWidget {
         this.scaleY = isActive ? setupScaleY(activeController) : null,
         super(key: key);
 
+  // Animations for transforms during the 'active animations'
   final Animation<double> rotation;
   final Animation<double> translationX;
   final Animation<double> translationY;
   final Animation<double> scaleX;
   final Animation<double> scaleY;
+  // The transform origin of the animaitons
   final Alignment transformOrigin;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
+    // If [this.Active] flag is true, build the [AnimatedBuilder].
     if(this.isActive) {
       return
         AnimatedBuilder(
@@ -151,6 +168,7 @@ class LeafAnimation extends StatelessWidget {
             );
           },
         );
+    // Else build just the child.
     } else {
       return this.child;
     }

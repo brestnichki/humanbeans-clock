@@ -4,16 +4,25 @@ import 'package:clock/Leaf.dart';
 import 'package:flutter/material.dart';
 import 'package:supernova_flutter_ui_toolkit/keyframes.dart';
 
+// Widget that holds the elements for the botttom right "branch"
+//
+// All the widgets in the class are aligned to the bottom right
+// and are scaled
 class BottomRightBranch extends StatelessWidget {
 
   const BottomRightBranch({ Key key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // We get the model here to avoid going up the three in each of the widget
+    //
+    // We use the model for the [Utils] class, which scales the widgets with absolute
+    // dimentions. The size aspect of the model should change only on screen resize,
+    // so the widget should not rebuild
     final ClockUiInheritedModel model = ClockUiInheritedModel.of(context, 'size');
 
     return
-      Container(
+      SizedBox(
         width: model.utils.scaleDimentions(490),
         height: model.utils.scaleDimentions(250),
         child: BranchAnimation(
@@ -53,7 +62,7 @@ class BottomRightBranch extends StatelessWidget {
                 imageUri: 'assets/images/Pngs_Flat_0010_F_Leaf_R_2.png',
                 keyframes: <Keyframe<double>>[
                   Keyframe<double>(fraction: 0, value: 0),
-                  Keyframe<double>(fraction: 0.9, value: -0.06),
+                  Keyframe<double>(fraction: 0.9, value: 0.09),
                   Keyframe<double>(fraction: 1, value: 0)
                 ]
               ),
@@ -68,7 +77,7 @@ class BottomRightBranch extends StatelessWidget {
                 imageUri: 'assets/images/Pngs_Flat_0012_F_Leaf_R_4.png',
                 keyframes: <Keyframe<double>>[
                   Keyframe<double>(fraction: 0, value: 0),
-                  Keyframe<double>(fraction: 0.9, value: -0.06),
+                  Keyframe<double>(fraction: 0.9, value: 0.06),
                   Keyframe<double>(fraction: 1, value: 0)
                 ],
               ),
@@ -83,7 +92,7 @@ class BottomRightBranch extends StatelessWidget {
                 imageUri: 'assets/images/Pngs_Flat_0013_F_Leaf_R_5.png',
                 keyframes: <Keyframe<double>>[
                   Keyframe<double>(fraction: 0, value: 0),
-                  Keyframe<double>(fraction: 0.9, value: -0.06),
+                  Keyframe<double>(fraction: 0.9, value: -0.12),
                   Keyframe<double>(fraction: 1, value: 0)
                 ],
               ),
@@ -127,7 +136,7 @@ class BottomRightBranch extends StatelessWidget {
                           imageUri: 'assets/images/Pngs_Flat_0011_F_Leaf_R_3.png',
                           keyframes: <Keyframe<double>>[
                             Keyframe<double>(fraction: 0, value: 0),
-                            Keyframe<double>(fraction: 0.9, value: 0.09),
+                            Keyframe<double>(fraction: 0.9, value: 0.20),
                             Keyframe<double>(fraction: 1, value: 0)
                           ],
                         ),

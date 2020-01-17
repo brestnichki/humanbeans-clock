@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:supernova_flutter_ui_toolkit/keyframes.dart';
 
+// Function creating the exit end enter aniamtions for the [ClockCounter] widgets
+//
+// [controller] is the controller that plays the animations,
+// [keyframes] is the breakpoints for the animation,
+// [interval] is the [Interval] used to delay sequential number animations
 Animation<double> setupTranslationY(AnimationController controller, List<Keyframe<double>> keyframes, Interval interval) {
   return
     Interpolation(
@@ -13,7 +18,7 @@ Animation<double> setupTranslationY(AnimationController controller, List<Keyfram
     );
 }
 
-
+// Widget building the [AnimatedBuilder] for the clock face numbers
 class NumbersAnimation extends StatelessWidget {
 
   NumbersAnimation({
