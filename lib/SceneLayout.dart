@@ -23,8 +23,8 @@ class SceneLayout extends StatelessWidget {
                 return
                   CustomPaint(
                     foregroundPainter: TexturePainter(
-                      screenTexture: snapshot.data[1],
-                      multiplyTexture: snapshot.data[2],
+                      screenTexture: snapshot.data[0],
+                      multiplyTexture: snapshot.data[1],
                     ),
                     child: const LayersLayout(),
                   );

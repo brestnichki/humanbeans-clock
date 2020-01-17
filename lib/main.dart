@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+
+  //Root for the clock app
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Humanbeans Clock',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: null,
       home: Clock(),
       debugShowCheckedModeBanner: false,
     );

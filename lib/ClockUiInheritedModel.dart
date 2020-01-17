@@ -5,8 +5,12 @@ import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/material.dart' hide Image;
 
 class ClockUiInheritedModel extends InheritedModel<String>{
+
   final String minutes;
   final String seconds;
+
+  final String prevMinutes;
+  final String prevSeconds;
 
   final AnimationController idleAnimation;
   final AnimationController activeAnimation;
@@ -21,12 +25,16 @@ class ClockUiInheritedModel extends InheritedModel<String>{
   final FlareControls birdControls;
   final FlareControls haloControls;
 
-  final leavesIndexes =  List<int>.generate(18, (i) => i + 1);
+  final leavesIndexes =  List<int>.generate(19, (i) => i);
+
+  final AnimationController clockAnimation;
 
   ClockUiInheritedModel({
     Key key,
     this.minutes,
     this.seconds,
+    this.prevMinutes,
+    this.prevSeconds,
     this.idleAnimation,
     this.activeAnimation,
     this.activeAnimationWidgetIndex,
@@ -35,6 +43,7 @@ class ClockUiInheritedModel extends InheritedModel<String>{
     this.imagesFuture,
     this.birdControls,
     this.haloControls,
+    this.clockAnimation,
     Widget child
   }) : super(key: key, child: child);
 

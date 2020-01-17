@@ -9,20 +9,24 @@ class BirdAnimations {
   final List<Map<String, dynamic>> _transitAnimations = [
     {
       "name" : 'Nap',
-      "duration": 10
+      "duration": 20000
     },
     {
       "name" : 'Grooming',
-      "duration": 10
+      "duration": 3150
     },
     {
       "name" : 'Wing_span',
-      "duration": 10
+      "duration": 1520
     },
     {
       "name" : 'Wings_Move',
-      "duration": 10
+      "duration": 2400
     },
+    {
+      "name" : 'Head_move',
+      "duration": 4130
+    }
   ];
 
   String getFlyIn() {

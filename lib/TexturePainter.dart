@@ -15,18 +15,26 @@ class TexturePainter extends CustomPainter{
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawImage(
+    final screenImageSize = Size(this.screenTexture.width.toDouble(), this.screenTexture.height.toDouble());
+    final screenSrc = Offset.zero & screenImageSize;
+    final dst = Offset.zero & size;
+
+    canvas.drawImageRect(
         this.screenTexture,
-        Offset(0, 0),
+        screenSrc,
+        dst,
         this.screenPaint
     );
 
-    canvas.drawImage(
+    final multiplyImageSize = Size(this.multiplyTexture.width.toDouble(),this.multiplyTexture.height.toDouble());
+    final multiplySrc = Offset.zero & multiplyImageSize;
+
+    canvas.drawImageRect(
         this.multiplyTexture,
-        Offset(0, 0),
+        screenSrc,
+        dst,
         this.multiplyPaint
     );
-
   }
 
   @override

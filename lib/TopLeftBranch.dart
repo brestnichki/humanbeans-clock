@@ -1,18 +1,24 @@
 import 'package:clock/BranchAnimation.dart';
 import 'package:clock/ClockUiInheritedModel.dart';
+import 'package:clock/Leaf.dart';
 import 'package:clock/LeafAnimation.dart';
 import 'package:clock/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:supernova_flutter_ui_toolkit/keyframes.dart';
 
 class TopLeftBranch extends StatelessWidget {
+
+  const TopLeftBranch({ Key key }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final ClockUiInheritedModel model = ClockUiInheritedModel.of(context, 'size');
+
     return SizedBox(
-      width: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(410),
-      height: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(280),
+      width: model.utils.scaleDimentions(410),
+      height: model.utils.scaleDimentions(280),
       child: BranchAnimation(
-        animationController: ClockUiInheritedModel.of(context, 'branchAnimation').idleAnimation,
+        animationController: model.idleAnimation,
         keyframes: <Keyframe<double>>[
           Keyframe<double>(fraction: 0, value: 0),
           Keyframe<double>(fraction: 0.9, value: 0.03),
@@ -23,165 +29,95 @@ class TopLeftBranch extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            Positioned(
-              top: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(77),
-              left: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(359),
-              child: BranchAnimation(
-                animationController: ClockUiInheritedModel.of(context, 'branchAnimation').idleAnimation,
-                keyframes: <Keyframe<double>>[
-                  Keyframe<double>(fraction: 0, value: 0),
-                  Keyframe<double>(fraction: 0.9, value: -0.06),
-                  Keyframe<double>(fraction: 1, value: 0)
-                ],
-                interval: Interval(0, 1, curve: Curves.easeOutQuad),
-                transformOrigin: FractionalOffset(0, 0),
-                child: Container(
-                  width: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(47),
-                  height: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(98),
-                  child: LeafAnimation(
-                    activeController: ClockUiInheritedModel.of(context, 'activeAnimation').activeAnimation,
-                    isActive: ClockUiInheritedModel.of(context, 'activeAnimationIndex3').activeAnimationWidgetIndex == 3,
-                    child: Image.asset(
-                      'assets/images/Pngs_Flat_0027_B_Leaf_L_6.png',
-                    ),
-                  ),
-                ),
-              ),
+            Leaf(
+              index: 3,
+              top: 77,
+              left: 359,
+              width: 47,
+              height: 98,
+              offset: FractionalOffset(0.05, 0),
+              imageUri: 'assets/images/Pngs_Flat_0027_B_Leaf_L_6.png',
+              keyframes: <Keyframe<double>>[
+                Keyframe<double>(fraction: 0, value: 0),
+                Keyframe<double>(fraction: 0.9, value: -0.06),
+                Keyframe<double>(fraction: 1, value: 0)
+              ],
+            ),
+            Leaf(
+              index: 4,
+              top: 69,
+              left: 212,
+              width: 80,
+              height: 68,
+              offset: FractionalOffset(0, 0),
+              imageUri: 'assets/images/Pngs_Flat_0028_B_Leaf_L_5.png',
+              keyframes: <Keyframe<double>>[
+                Keyframe<double>(fraction: 0, value: 0),
+                Keyframe<double>(fraction: 0.9, value: -0.06),
+                Keyframe<double>(fraction: 1, value: 0)
+              ],
+            ),
+            Leaf(
+              index: 5,
+              top: 23,
+              left: 180,
+              width: 55,
+              height: 21,
+              offset: FractionalOffset(0, 0.8),
+              imageUri: 'assets/images/Pngs_Flat_0029_B_leaf_L_4.png',
+              keyframes: <Keyframe<double>>[
+                Keyframe<double>(fraction: 0, value: 0),
+                Keyframe<double>(fraction: 0.9, value: -0.06),
+                Keyframe<double>(fraction: 1, value: 0)
+              ],
+            ),
+            Leaf(
+              index: 6,
+              top: 19,
+              left: 105,
+              width: 76,
+              height: 36,
+              offset: FractionalOffset(1, 0.6),
+              imageUri: 'assets/images/Pngs_Flat_0030_B_Leaf_L_3.png',
+              keyframes: <Keyframe<double>>[
+                Keyframe<double>(fraction: 0, value: 0),
+                Keyframe<double>(fraction: 0.9, value: -0.06),
+                Keyframe<double>(fraction: 1, value: 0)
+              ],
+            ),
+            Leaf(
+              index: 7,
+              top: 39,
+              left: 15,
+              width: 58,
+              height: 60,
+              offset: FractionalOffset(1, 0.9),
+              imageUri: 'assets/images/Pngs_Flat_0031_B_Leaf_L_2.png',
+              keyframes: <Keyframe<double>>[
+                Keyframe<double>(fraction: 0, value: 0),
+                Keyframe<double>(fraction: 0.9, value: -0.06),
+                Keyframe<double>(fraction: 1, value: 0)
+              ],
+            ),
+            Leaf(
+              index: 8,
+              top: 185,
+              left: 22,
+              width: 61,
+              height: 85,
+              offset: FractionalOffset(1, 0),
+              imageUri: 'assets/images/Pngs_Flat_0032_B_Leaf_L_1.png',
+              keyframes: <Keyframe<double>>[
+                Keyframe<double>(fraction: 0, value: 0),
+                Keyframe<double>(fraction: 0.9, value: -0.06),
+                Keyframe<double>(fraction: 1, value: 0)
+              ],
             ),
             Positioned(
-              top: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(69),
-              left: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(212),
+              top: model.utils.scaleDimentions(110),
+              left: model.utils.scaleDimentions(115),
               child: BranchAnimation(
-                animationController: ClockUiInheritedModel.of(context, 'branchAnimation').idleAnimation,
-                keyframes: <Keyframe<double>>[
-                  Keyframe<double>(fraction: 0, value: 0),
-                  Keyframe<double>(fraction: 0.9, value: -0.06),
-                  Keyframe<double>(fraction: 1, value: 0)
-                ],
-                interval: Interval(0, 1, curve: Curves.easeOutQuad),
-                transformOrigin: FractionalOffset(0, 0),
-                child: Container(
-                  width: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(80),
-                  height: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(68),
-                  child: LeafAnimation(
-                    activeController: ClockUiInheritedModel.of(context, 'activeAnimation').activeAnimation,
-                    isActive: ClockUiInheritedModel.of(context, 'activeAnimationIndex4').activeAnimationWidgetIndex == 4,
-                    child: Image.asset(
-                      'assets/images/Pngs_Flat_0028_B_Leaf_L_5.png',
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(23),
-              left: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(180),
-              child: BranchAnimation(
-                animationController: ClockUiInheritedModel.of(context, 'branchAnimation').idleAnimation,
-                keyframes: <Keyframe<double>>[
-                  Keyframe<double>(fraction: 0, value: 0),
-                  Keyframe<double>(fraction: 0.9, value: -0.06),
-                  Keyframe<double>(fraction: 1, value: 0)
-                ],
-                interval: Interval(0, 1, curve: Curves.easeOutQuad),
-                transformOrigin: FractionalOffset(0, 1),
-                child: Container(
-                  width: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(55),
-                  height: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(21),
-                  child: LeafAnimation(
-                    activeController: ClockUiInheritedModel.of(context, 'activeAnimation').activeAnimation,
-                    isActive: ClockUiInheritedModel.of(context, 'activeAnimationIndex5').activeAnimationWidgetIndex == 5,
-                    transformOrigin: FractionalOffset(0, 1),
-                    child: Image.asset(
-                      'assets/images/Pngs_Flat_0029_B_leaf_L_4.png',
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(19),
-              left: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(105),
-              child: BranchAnimation(
-                animationController: ClockUiInheritedModel.of(context, 'branchAnimation').idleAnimation,
-                keyframes: <Keyframe<double>>[
-                  Keyframe<double>(fraction: 0, value: 0),
-                  Keyframe<double>(fraction: 0.9, value: -0.06),
-                  Keyframe<double>(fraction: 1, value: 0)
-                ],
-                interval: Interval(0, 1, curve: Curves.easeOutQuad),
-                transformOrigin: FractionalOffset(1, 0.8),
-                child: Container(
-                  width: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(76),
-                  height: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(32),
-                  child: LeafAnimation(
-                    activeController: ClockUiInheritedModel.of(context, 'activeAnimation').activeAnimation,
-                    isActive: ClockUiInheritedModel.of(context, 'activeAnimationIndex6').activeAnimationWidgetIndex == 6,
-                    transformOrigin: FractionalOffset(1, 0.8),
-                    child: Image.asset(
-                      'assets/images/Pngs_Flat_0030_B_Leaf_L_3.png',
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(39),
-              left: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(15),
-              child: BranchAnimation(
-                animationController: ClockUiInheritedModel.of(context, 'branchAnimation').idleAnimation,
-                keyframes: <Keyframe<double>>[
-                  Keyframe<double>(fraction: 0, value: 0),
-                  Keyframe<double>(fraction: 0.9, value: -0.06),
-                  Keyframe<double>(fraction: 1, value: 0)
-                ],
-                interval: Interval(0, 1, curve: Curves.easeOutQuad),
-                transformOrigin: FractionalOffset(1, 1),
-                child: Container(
-                  width: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(58),
-                  height: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(60),
-                  child: LeafAnimation(
-                    activeController: ClockUiInheritedModel.of(context, 'activeAnimation').activeAnimation,
-                    isActive: ClockUiInheritedModel.of(context, 'activeAnimationIndex7').activeAnimationWidgetIndex == 7,
-                    transformOrigin: FractionalOffset(1, 1),
-                    child: Image.asset(
-                      'assets/images/Pngs_Flat_0031_B_Leaf_L_2.png',
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(185),
-              left: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(22),
-              child: BranchAnimation(
-                animationController: ClockUiInheritedModel.of(context, 'branchAnimation').idleAnimation,
-                keyframes: <Keyframe<double>>[
-                  Keyframe<double>(fraction: 0, value: 0),
-                  Keyframe<double>(fraction: 0.9, value: -0.06),
-                  Keyframe<double>(fraction: 1, value: 0)
-                ],
-                interval: Interval(0, 1, curve: Curves.easeOutQuad),
-                transformOrigin: FractionalOffset(0.2, 0),
-                child: Container(
-                  width: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(61),
-                  height: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(85),
-                  child: LeafAnimation(
-                    activeController: ClockUiInheritedModel.of(context, 'activeAnimation').activeAnimation,
-                    isActive: ClockUiInheritedModel.of(context, 'activeAnimationIndex8').activeAnimationWidgetIndex == 8,
-                    transformOrigin: FractionalOffset(0.2, 0),
-                    child: Image.asset(
-                      'assets/images/Pngs_Flat_0032_B_Leaf_L_1.png',
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(110),
-              left: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(115),
-              child: BranchAnimation(
-                animationController: ClockUiInheritedModel.of(context, 'branchAnimation').idleAnimation,
+                animationController: model.idleAnimation,
                 keyframes: <Keyframe<double>>[
                   Keyframe<double>(fraction: 0, value: 0),
                   Keyframe<double>(fraction: 0.9, value: -0.06),
@@ -190,8 +126,8 @@ class TopLeftBranch extends StatelessWidget {
                 interval: Interval(0, 1, curve: Curves.easeOutQuad),
                 transformOrigin: FractionalOffset(0.1, 0),
                 child: Container(
-                  width: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(155),
-                  height: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(122),
+                  width: model.utils.scaleDimentions(155),
+                  height: model.utils.scaleDimentions(122),
                   child: Image.asset(
                     'assets/images/Pngs_Flat_0034_B_Br_Left_1.png',
                   ),
@@ -202,8 +138,8 @@ class TopLeftBranch extends StatelessWidget {
               top: 0,
               left: 0,
               child: Container(
-                width: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(368),
-                height: ClockUiInheritedModel.of(context, 'size').utils.scaleDimentions(191),
+                width: model.utils.scaleDimentions(368),
+                height: model.utils.scaleDimentions(191),
                 child: Image.asset(
                   "assets/images/Pngs_Flat_0033_B_Br_Left.png",
                   fit: BoxFit.contain

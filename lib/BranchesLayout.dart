@@ -1,6 +1,7 @@
 import 'package:clock/BottomLeftBranch.dart';
 import 'package:clock/BottomRightBranch.dart';
 import 'package:clock/ClockUiInheritedModel.dart';
+import 'package:clock/ClockCounter.dart';
 import 'package:clock/TopLeftBranch.dart';
 import 'package:clock/TopRightBranch.dart';
 import 'package:flare_flutter/flare_actor.dart';
@@ -13,21 +14,25 @@ class BranchesLayout extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Stack(
+        fit: StackFit.expand,
         children: <Widget> [
-          Positioned(
+          const Positioned(
             top: 0,
-            left: 0,
-            child: TopLeftBranch(),
+            left: -1,
+            child: const TopLeftBranch(),
           ),
-          Positioned(
+          const Positioned(
             top: 0,
-            right: 0,
-            child: TopRightBranch(),
+            right: -1,
+            child: const TopRightBranch(),
           ),
-          Positioned(
+          Center(
+            child: ClockCounter()
+          ),
+          const Positioned(
             bottom: 0,
-            left: 0,
-            child: BottomLeftBranch()
+            left: -1,
+            child: const BottomLeftBranch()
           ),
           FlareActor(
           'assets/rive/Bird_Final_2.flr',
@@ -35,10 +40,10 @@ class BranchesLayout extends StatelessWidget{
           fit: BoxFit.contain,
           shouldClip: false,
           ),
-          Positioned(
+          const Positioned(
             bottom: 0,
-            right: 0,
-            child: BottomRightBranch(),
+            right: -1,
+            child: const BottomRightBranch(),
           )
       ]
     );
