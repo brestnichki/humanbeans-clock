@@ -28,7 +28,7 @@ class Clock extends StatefulWidget {
 }
 
 class _ClockState extends State<Clock> with TickerProviderStateMixin{
-  // The current time for the watch
+  /// The current time for the watch
   DateTime _dateTime;
   // The time during the previous render
   //
