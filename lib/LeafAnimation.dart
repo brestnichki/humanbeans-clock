@@ -97,7 +97,7 @@ Animation<double> setupScaleY(AnimationController controller){
 }
 
 
-// Class building the [AnimationBuilder] for the 'active animation' of the [Leaf]
+// Class building the [AnimatedBuilder] for the 'active animation' of the [Leaf]
 //
 // Most of the time this widget is not animating, so if there's no [LeafAniamtion.isActive] flag
 // true, it builds just the child. When it gets rebuilded with [LeafAniamtion.isActive] flag true,

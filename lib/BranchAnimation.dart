@@ -18,9 +18,9 @@ Animation<double> setupRotationZ(AnimationController controller, List<Keyframe<d
     );
 }
 
-// Class that wraps it's child in the [AnimationBuilder] to play the "Idle Animation"
+// Class that wraps it's child in the [AnimatedBuilder] to play the "Idle Animation"
 //
-// The class creates it's animation and builds the [AnimationBuilder]
+// The class creates it's animation and builds the [AnimatedBuilder]
 class BranchAnimation extends StatelessWidget {
 
   BranchAnimation({
@@ -40,7 +40,7 @@ class BranchAnimation extends StatelessWidget {
   final Animation<double> rotationZ;
   // Origin of the roration
   final Alignment transformOrigin;
-  // The child to be used in the [AnimationBuilder]
+  // The child to be used in the [AnimatedBuilder]
   final Widget child;
 
   @override

@@ -50,7 +50,6 @@ class BirdAnimations {
   //
   // If there's no animations that can fit, return null.
   String getRandom(int timeLeft) {
-    print(timeLeft);
     // Filter the animatons on animation duration < [timeLeft] argument.
     List<Map<String, dynamic>> possibleAnimations =
       _transitAnimations.where((element) => element['duration'] < timeLeft).toList();

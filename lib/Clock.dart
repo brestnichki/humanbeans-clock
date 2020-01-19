@@ -57,6 +57,12 @@ class _ClockState extends State<Clock> with TickerProviderStateMixin, WidgetsBin
   // in the app.
   Timer _timer;
 
+  // Boolean to track if the app is in the foreground
+  //
+  // Used to disable playing animations when the app is paused, because trying to play
+  // them form [Timer] callback if they're not playing will throw an exeption
+  bool _appInForeground = true;
+
   // List of Futures that resolves when [dart:ui.Images] the texture effect used in the
   // clock.
   //
@@ -140,7 +146,6 @@ class _ClockState extends State<Clock> with TickerProviderStateMixin, WidgetsBin
         duration: Duration(seconds: 8),
         vsync: this
     );
-
 
     // Initiating the [ClockCounter] animation.
     _clockAnimation = AnimationController(
@@ -237,9 +242,19 @@ class _ClockState extends State<Clock> with TickerProviderStateMixin, WidgetsBin
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state){
-      if(state == AppLifecycleState.resumed){
-        _dateTime = DateTime.now();
-        _prevTime = _dateTime;
+      if(state == AppLifecycleState.paused){
+        // Remove the [_birdTime] value, so when the app is resumed,
+        // there's no change, the [_birdControlls] animation starts before
+        // the [_getBirdTime] Future resolves
+        _birdTime = null;
+        // Raise the flag not to try and play the [_activeAnimation] and [_clockAnimation] animations,
+        // as they are going to throw if not finished (and they don't finish in paused app).
+        _appInForeground = false;
+      } else if(state == AppLifecycleState.resumed){
+        // Set the flag to allow [_activeAnimation] and [_clockAnimation] to play
+        _appInForeground = true;
+        // Read [_birdTime] form the file system and assign it when the Future resolves
+        _getBirdTime();
       }
   }
 
@@ -257,9 +272,6 @@ class _ClockState extends State<Clock> with TickerProviderStateMixin, WidgetsBin
       // Assing [_date_Time] to current time
       _dateTime = DateTime.now();
 
-      // Reset and play the animation for the [ClockCounter] numbers.
-      _clockAnimation.reset();
-      _clockAnimation.forward().orCancel;
 
       // If the [_getBirdTime()] Future has returned and [_birdTime] has value check if the [_dateTime] (current time)
       // is after [_birdTime] (the time the bird animation) is scheduled and if its round minute
@@ -272,13 +284,20 @@ class _ClockState extends State<Clock> with TickerProviderStateMixin, WidgetsBin
         // Removes the status listener that loops the animation and adds status listener that will play the [_birdControls] animation
         _idleAnimation.removeStatusListener(_idleAnimationListener);
         _idleAnimation.addStatusListener(_lastIdleAnimationListener);
-      // Else if not's the time to play the bird animaion play the "Active animation" of the [_activeAnimation], the
+      // Else if not's the time to play and it's round minute the bird animaion play the "Active animation" of the [_activeAnimation], the
       // leaves flying off
-      } else {
+      } else if(
+        _dateTime.second == 0 &&
+          _appInForeground == true
+      ){
+        // Reset and play the animation for the [ClockCounter] numbers.
+        _clockAnimation.reset();
+        _clockAnimation.forward().orCancel;
+
         // Choose a random index for the leaf that's going to fly off.
         //
         // This index is used in the [ClockUiInheritedModel] InheritedModel to notify
-        // the new leaf to rebuild with the [AnimationBuilder] wrapper.
+        // the new leaf to rebuild with the [AnimatedBuilder] wrapper.
         _activeAnimationWidgetIndex = Random().nextInt(19);
         // Play the [_activeAnimation]
         _activeAnimation.reset();
@@ -298,7 +317,6 @@ class _ClockState extends State<Clock> with TickerProviderStateMixin, WidgetsBin
   // [AnimationStatusListener] that loops the animation.
   void _idleAnimationListener(status){
     if(status == AnimationStatus.completed){
-      print(_utils.ratio);
       _idleAnimation.reset();
       _idleAnimation.forward().orCancel;
     }
@@ -460,21 +478,27 @@ class _ClockState extends State<Clock> with TickerProviderStateMixin, WidgetsBin
 
     return
       // Return the [ClockUiInheritedModel] that holds all the data for the clock
-      ClockUiInheritedModel(
-        hours: hours,
-        minutes: minutes,
-        prevHours: prevHours,
-        prevMinutes: prevMinutes,
-        idleAnimation: _idleAnimation,
-        activeAnimation: _activeAnimation,
-        activeAnimationWidgetIndex: _activeAnimationWidgetIndex,
-        imagesFuture: _imagesFuture,
-        birdControls: _birdControls,
-        haloControls: _haloControls,
-        clockAnimation: _clockAnimation,
-        utils: _utils,
-        // It's important to be const to avoid rebuilding
-        child: const SceneLayout() ,
+      Semantics(
+        label: "Current time: $hours hours and $minutes minutes",
+        child: ExcludeSemantics(
+          excluding: true,
+          child: ClockUiInheritedModel(
+            hours: hours,
+            minutes: minutes,
+            prevHours: prevHours,
+            prevMinutes: prevMinutes,
+            idleAnimation: _idleAnimation,
+            activeAnimation: _activeAnimation,
+            activeAnimationWidgetIndex: _activeAnimationWidgetIndex,
+            imagesFuture: _imagesFuture,
+            birdControls: _birdControls,
+            haloControls: _haloControls,
+            clockAnimation: _clockAnimation,
+            utils: _utils,
+            // It's important to be const to avoid rebuilding
+            child: const SceneLayout() ,
+          ),
+        ),
       );
   }
 }

@@ -11,7 +11,7 @@ class ClockCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // The splittend single numbers form the pairs of minutes and seconds number
+    // The split single numbers form the pairs of hours and minutes number
     //
     // We use them in a lot of places and i feel it's easeier to declare and asign it
     // here.
@@ -44,8 +44,8 @@ class ClockCounter extends StatelessWidget {
     // Getting hold of the [ClockUiInheritedModel]
     //
     // Doing it here will cause the entire widget to rebuild on each change in the
-    // 'seconds' aspect of the model, but many of the widgets use it anyway
-    ClockUiInheritedModel model = ClockUiInheritedModel.of(context, 'seconds');
+    // 'minutes' aspect of the model, but many of the widgets use it anyway
+    ClockUiInheritedModel model = ClockUiInheritedModel.of(context, 'minutes');
 
 
     // [TextStyle] for the clock's numbers
@@ -57,8 +57,9 @@ class ClockCounter extends StatelessWidget {
         fontSize: model.utils.scaleDimentions(159),
         color: Color.fromRGBO(217, 136, 136, 1),
         decoration: TextDecoration.none,
-        letterSpacing: model.utils.scaleDimentions(10),
-        height: 2.5
+        letterSpacing: model.utils.scaleDimentions(2),
+        height: 2.5,
+        fontWeight: FontWeight.w400
 
     );
 
@@ -95,8 +96,8 @@ class ClockCounter extends StatelessWidget {
       );
     }
 
-    // If the [ClockUiInheritedModel] is animating and there's a change in the first letter
-    // of the seconds build the two [NumbersAnimation] widgets that are going to play the
+    // If the [ClockUiInheritedModel] is animating and there's a change in the first number
+    // of the minutes build the two [NumbersAnimation] widgets that are going to play the
     // exit and enter animation respectively.
     if(
       model.clockAnimation.isAnimating &&
@@ -136,7 +137,7 @@ class ClockCounter extends StatelessWidget {
     }
 
     // If the [ClockUiInheritedModel] is animating and there's a change in the second letter
-    // of the minutes build the two [NumbersAnimation] widgets that are going to play the
+    // of the hours build the two [NumbersAnimation] widgets that are going to play the
     // exit and enter animation respectively.
     if(model.clockAnimation.isAnimating && model.prevHours.substring(1, 2) != model.hours.substring(1, 2)){
       hoursOnes = Stack(
@@ -173,7 +174,7 @@ class ClockCounter extends StatelessWidget {
     }
 
     // If the [ClockUiInheritedModel] is animating and there's a change in the first letter
-    // of the minutes build the two [NumbersAnimation] widgets that are going to play the
+    // of the hours build the two [NumbersAnimation] widgets that are going to play the
     // exit and enter animation respectively.
     if(model.clockAnimation.isAnimating && model.prevHours.substring(0, 1) != model.hours.substring(0, 1)){
       hoursTens = Stack(

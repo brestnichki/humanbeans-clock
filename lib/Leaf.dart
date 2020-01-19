@@ -7,7 +7,7 @@ import 'LeafAnimation.dart';
 
 // Widget that wraps the leaf elements.
 //
-// It holds both the 'Idle animation' and 'active animation' [AnimationBuilders]. Both builders are
+// It holds both the 'Idle animation' and 'active animation' [AnimatedBuilders]. Both builders are
 // build no matter if the animations are going to play.
 // The [Leaf] widget requires an enclosing stack as it uses Positioned.
 class Leaf extends StatelessWidget {
@@ -87,7 +87,7 @@ class Leaf extends StatelessWidget {
             // Here we refference he [ClockUiInheritedModel] in a different way.
             // We want this widget to rebuild on [ClockUiInheritedModel.activeAnimationWidgetIndex] change,
             // so we subscribe it to the aspect including the index.
-            isActive: ClockUiInheritedModel.of(context, 'activeAnimationIndex$this.index').activeAnimationWidgetIndex == this.index,
+            isActive: ClockUiInheritedModel.of(context, 'activeAnimationIndex${this.index}').activeAnimationWidgetIndex == this.index,
             toRight: this.toRight,
             child: Image.asset(
                 this.imageUri,

@@ -70,9 +70,7 @@ class ClockUiInheritedModel extends InheritedModel<String>{
       assert(clockAnimation != null),
       super(key: key, child: child);
 
-  // Only notify the widgets when [this.minutes], [this.seconds], [this.utils.ratio] or [this.activeAniamtionWidgetInex] chages.
-  //
-  // The [this.seconds] is diffenrent on each [_timer] callback in the [Clock] class, so notify on all rebuilds.
+  // Only notify the widgets when [this.hours], [this.minutes], [this.utils.ratio] or [this.activeAniamtionWidgetInex] chages.
   @override
   bool updateShouldNotify(ClockUiInheritedModel old) {
     return this.hours != old.hours ||
@@ -81,14 +79,14 @@ class ClockUiInheritedModel extends InheritedModel<String>{
             this.activeAnimationWidgetIndex != old.activeAnimationWidgetIndex;
   }
 
-  // Only notify the widgets that are subscibed to the 'miniutes' and 'seconds', 'size' or one of the generated [Leaf] indexes aspects.
+  // Only notify the widgets that are subscribed to the 'hours' and 'minutes', 'size' or one of the generated [Leaf] indexes aspects.
   @override
   bool updateShouldNotifyDependent(ClockUiInheritedModel old, Set<String> aspects) {
     return
-      // if the [this.minutes] has changed and the widget it's subscribed to 'minites' aspects.
-      (this.hours != old.hours && aspects.contains('miniutes')) ||
-      // if the [this.seconds] has changed and the widget it's subscribed to 'seconds' aspects.
-      (this.minutes != old.hours && aspects.contains('seconds')) ||
+      // if the [this.hours] has changed and the widget it's subscribed to 'hours' aspects.
+      (this.hours != old.hours && aspects.contains('hours')) ||
+      // if the [this.minutes] has changed and the widget it's subscribed to 'minutes' aspects.
+      (this.minutes != old.hours && aspects.contains('minutes')) ||
       // if the [this.utils.ratio] changes and the widget is's subscirbed to 'size'.
       (this.utils.ratio != old.utils.ratio && aspects.contains('size')) ||
       // Generates separate aspects for all the [Leaf] widgets and chooses to notify them.
@@ -110,7 +108,7 @@ class ClockUiInheritedModel extends InheritedModel<String>{
     return
           // Rebuild only if [this.activeAnimationWidgetIndex] has changed.
           //
-          // If the index is the same, the [Leaf] all ready has the [AnimationBuilder] to play the animation.
+          // If the index is the same, the [Leaf] all ready has the [AnimatedBuilder] to play the animation.
           this.activeAnimationWidgetIndex != old.activeAnimationWidgetIndex &&
           // Only notify the widgets that have aspect in the model 'activeAniamtionIndex'+index.
           //
