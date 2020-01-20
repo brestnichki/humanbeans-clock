@@ -41,11 +41,11 @@ Fonts were another great challenge. We soon found out all fonts we tested had si
 
 We came up with the idea to displace the numbers, hoping the dynamic would compensate this, but still some number combinations created huge empty spaces that distorted the balance of the design:
 
-![Rough design of the app with highlight of big space between narrow and thick numbers on a default font](https://humanbeans.dev/5.png)
+![Rough design of the app with highlight of big space between narrow and thick numbers on a default font](https://humanbeans.dev/6.png)
 
 We knew we had to create our own font. We found using playful characters we could tilt the character stems – with each letter leaning in a different direction – empty spaces would not be as apparent:
 
-![Outline of the custom font](https://humanbeans.dev/6.png)
+![Outline of the custom font](https://humanbeans.dev/5.png)
 ![The custom font in the context of the app. The narrow characters are tilted to offset the problem with big spaces around them](https://humanbeans.dev/7.png)
 
 Playful characters worked better in a lot of cases we previously had problems with.
@@ -72,7 +72,9 @@ You can barely notice the branches moving.
 
 Bird flies in and stays for a minute. It’s animation sequence is not predefined- it plays animations randomly. The bird can choose what to do next, making each time it appears a unique event.
 
-Development
+## Development
+
+
 
 ## Reflection
 
