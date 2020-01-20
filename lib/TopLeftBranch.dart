@@ -1,8 +1,6 @@
 import 'package:clock/BranchAnimation.dart';
 import 'package:clock/ClockUiInheritedModel.dart';
 import 'package:clock/Leaf.dart';
-import 'package:clock/LeafAnimation.dart';
-import 'package:clock/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:supernova_flutter_ui_toolkit/keyframes.dart';
 
@@ -11,8 +9,7 @@ import 'package:supernova_flutter_ui_toolkit/keyframes.dart';
 // All the widgets in the class are aligned to the top left
 // and are scaled
 class TopLeftBranch extends StatelessWidget {
-
-  const TopLeftBranch({ Key key }) : super(key: key);
+  const TopLeftBranch({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +18,10 @@ class TopLeftBranch extends StatelessWidget {
     // We use the model for the [Utils] class, which scales the widgets with absolute
     // dimentions. The size aspect of the model should change only on screen resize,
     // so the widget should not rebuild
-    final ClockUiInheritedModel model = ClockUiInheritedModel.of(context, 'size');
+    final ClockUiInheritedModel model =
+        ClockUiInheritedModel.of(context, 'size');
 
-    return
-      SizedBox(
+    return SizedBox(
         width: model.utils.scaleDimentions(410),
         height: model.utils.scaleDimentions(280),
         child: BranchAnimation(
@@ -39,6 +36,38 @@ class TopLeftBranch extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
+              Positioned(
+                top: 0,
+                left: 0,
+                child: Container(
+                  width: model.utils.scaleDimentions(368),
+                  height: model.utils.scaleDimentions(191),
+                  child: Image.asset(
+                      "assets/images/Pngs_Flat_0033_B_Br_Left.png",
+                      fit: BoxFit.contain),
+                ),
+              ),
+              Positioned(
+                top: model.utils.scaleDimentions(110),
+                left: model.utils.scaleDimentions(115),
+                child: BranchAnimation(
+                  animationController: model.idleAnimation,
+                  keyframes: <Keyframe<double>>[
+                    Keyframe<double>(fraction: 0, value: 0),
+                    Keyframe<double>(fraction: 0.9, value: -0.06),
+                    Keyframe<double>(fraction: 1, value: 0)
+                  ],
+                  interval: Interval(0, 1, curve: Curves.easeOutQuad),
+                  transformOrigin: FractionalOffset(0.1, 0),
+                  child: Container(
+                    width: model.utils.scaleDimentions(155),
+                    height: model.utils.scaleDimentions(122),
+                    child: Image.asset(
+                      'assets/images/Pngs_Flat_0034_B_Br_Left_1.png',
+                    ),
+                  ),
+                ),
+              ),
               Leaf(
                 index: 3,
                 top: 77,
@@ -123,42 +152,8 @@ class TopLeftBranch extends StatelessWidget {
                   Keyframe<double>(fraction: 1, value: 0)
                 ],
               ),
-              Positioned(
-                top: model.utils.scaleDimentions(110),
-                left: model.utils.scaleDimentions(115),
-                child: BranchAnimation(
-                  animationController: model.idleAnimation,
-                  keyframes: <Keyframe<double>>[
-                    Keyframe<double>(fraction: 0, value: 0),
-                    Keyframe<double>(fraction: 0.9, value: -0.06),
-                    Keyframe<double>(fraction: 1, value: 0)
-                  ],
-                  interval: Interval(0, 1, curve: Curves.easeOutQuad),
-                  transformOrigin: FractionalOffset(0.1, 0),
-                  child: Container(
-                    width: model.utils.scaleDimentions(155),
-                    height: model.utils.scaleDimentions(122),
-                    child: Image.asset(
-                      'assets/images/Pngs_Flat_0034_B_Br_Left_1.png',
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 0,
-                left: 0,
-                child: Container(
-                  width: model.utils.scaleDimentions(368),
-                  height: model.utils.scaleDimentions(191),
-                  child: Image.asset(
-                    "assets/images/Pngs_Flat_0033_B_Br_Left.png",
-                    fit: BoxFit.contain
-                  ),
-                ),
-              )
             ],
           ),
-        )
-      );
+        ));
   }
 }

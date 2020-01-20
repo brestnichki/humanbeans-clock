@@ -4,7 +4,6 @@ import 'package:supernova_flutter_ui_toolkit/keyframes.dart';
 import 'BranchAnimation.dart';
 import 'LeafAnimation.dart';
 
-
 // Widget that wraps the leaf elements.
 //
 // It holds both the 'Idle animation' and 'active animation' [AnimatedBuilders]. Both builders are
@@ -24,7 +23,7 @@ class Leaf extends StatelessWidget {
   // The bottom position of the [Positioned] element in the stack.
   final double bottom;
   // The [Keyframe] that decribes the 'idle animation' movement
-  final List<Keyframe<double>>keyframes;
+  final List<Keyframe<double>> keyframes;
   // The [Interval] used by the 'idle animation'
   final Interval interval;
   // The transform origin for the 'idle animation' of the leaf
@@ -36,27 +35,26 @@ class Leaf extends StatelessWidget {
   // [bool] governing the direciton of the 'active animation'
   final bool toRight;
 
-  const Leaf({
-    Key key,
-    this.top,
-    this.left,
-    this.right,
-    this.bottom,
-    this.interval = const Interval(0, 1, curve: Curves.easeOutQuad),
-    this.offset = const FractionalOffset(0, 0),
-    this.toRight = true,
-    @required this.width,
-    @required this.height,
-    @required this.keyframes,
-    @required this.imageUri,
-    @required this.index
-  }) :
-      assert(width != null ),
-      assert(height != null),
-      assert(keyframes != null),
-      assert(imageUri != null),
-      assert(index != null),
-      super(key: key );
+  const Leaf(
+      {Key key,
+      this.top,
+      this.left,
+      this.right,
+      this.bottom,
+      this.interval = const Interval(0, 1, curve: Curves.easeOutQuad),
+      this.offset = const FractionalOffset(0, 0),
+      this.toRight = true,
+      @required this.width,
+      @required this.height,
+      @required this.keyframes,
+      @required this.imageUri,
+      @required this.index})
+      : assert(width != null),
+        assert(height != null),
+        assert(keyframes != null),
+        assert(imageUri != null),
+        assert(index != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,18 +63,19 @@ class Leaf extends StatelessWidget {
     // 'Size' aspect should not cause rebuilds unless the size of the screen changes
     final model = ClockUiInheritedModel.of(context, 'size');
 
-    return
-    Positioned(
+    return Positioned(
       top: this.top != null ? model.utils.scaleDimentions(this.top) : null,
       left: this.left != null ? model.utils.scaleDimentions(this.left) : null,
-      right: this.right != null ? model.utils.scaleDimentions(this.right) : null,
-      bottom: this.bottom != null ? model.utils.scaleDimentions(this.bottom) : null,
+      right:
+          this.right != null ? model.utils.scaleDimentions(this.right) : null,
+      bottom:
+          this.bottom != null ? model.utils.scaleDimentions(this.bottom) : null,
       child: Container(
         width: model.utils.scaleDimentions(this.width),
         height: model.utils.scaleDimentions(this.height),
         // The widget doing the 'idle animation'. It runs continiously
         child: BranchAnimation(
-          animationController:  model.idleAnimation,
+          animationController: model.idleAnimation,
           keyframes: this.keyframes,
           interval: this.interval,
           transformOrigin: this.offset,
@@ -87,12 +86,12 @@ class Leaf extends StatelessWidget {
             // Here we refference he [ClockUiInheritedModel] in a different way.
             // We want this widget to rebuild on [ClockUiInheritedModel.activeAnimationWidgetIndex] change,
             // so we subscribe it to the aspect including the index.
-            isActive: ClockUiInheritedModel.of(context, 'activeAnimationIndex${this.index}').activeAnimationWidgetIndex == this.index,
+            isActive: ClockUiInheritedModel.of(
+                        context, 'activeAnimationIndex${this.index}')
+                    .activeAnimationWidgetIndex ==
+                this.index,
             toRight: this.toRight,
-            child: Image.asset(
-                this.imageUri,
-                fit: BoxFit.contain
-            ),
+            child: Image.asset(this.imageUri, fit: BoxFit.contain),
           ),
         ),
       ),

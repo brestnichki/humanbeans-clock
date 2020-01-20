@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
   /// Root for the clock app
   @override
   Widget build(BuildContext context) {
@@ -16,4 +15,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

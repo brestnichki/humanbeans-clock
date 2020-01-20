@@ -14,26 +14,11 @@ class BirdAnimations {
   //
   // The durations of the animations are given in milliseconds.
   final List<Map<String, dynamic>> _transitAnimations = [
-    {
-      "name" : 'Nap',
-      "duration": 20000
-    },
-    {
-      "name" : 'Grooming',
-      "duration": 3150
-    },
-    {
-      "name" : 'Wing_span',
-      "duration": 1520
-    },
-    {
-      "name" : 'Wings_Move',
-      "duration": 2400
-    },
-    {
-      "name" : 'Head_move',
-      "duration": 4130
-    }
+    {"name": 'Nap', "duration": 20000},
+    {"name": 'Grooming', "duration": 3150},
+    {"name": 'Wing_span', "duration": 1520},
+    {"name": 'Wings_Move', "duration": 2400},
+    {"name": 'Head_move', "duration": 4130}
   ];
 
   // Get the name of the enter animation.
@@ -51,14 +36,16 @@ class BirdAnimations {
   // If there's no animations that can fit, return null.
   String getRandom(int timeLeft) {
     // Filter the animatons on animation duration < [timeLeft] argument.
-    List<Map<String, dynamic>> possibleAnimations =
-      _transitAnimations.where((element) => element['duration'] < timeLeft).toList();
+    List<Map<String, dynamic>> possibleAnimations = _transitAnimations
+        .where((element) => element['duration'] < timeLeft)
+        .toList();
 
-    if(possibleAnimations.length == 0){
+    if (possibleAnimations.length == 0) {
       return null;
     }
 
     // Return random animation form the filtered list
-    return possibleAnimations[Random().nextInt(possibleAnimations.length)]['name'];
+    return possibleAnimations[Random().nextInt(possibleAnimations.length)]
+        ['name'];
   }
 }
