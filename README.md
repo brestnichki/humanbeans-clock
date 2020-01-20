@@ -76,9 +76,16 @@ Bird flies in and stays for a minute. It’s animation sequence is not predefine
 
 ### Dependancies and licensing
 
+The project is distributed under the [MIT License](https://github.com/brestnichki/humanbeans-clock/blob/master/LICENSE.md)
+
 The project depends on the following packages. The licensing for the packages can be found in the links below:
 
-* [Intl](https://pub.dev/packages/intl): License [BSD](https://github.com/dart-lang/intl/blob/master/LICENSE);
+* [intl](https://pub.dev/packages/intl): License [BSD](https://github.com/dart-lang/intl/blob/master/LICENSE);
+* Flutter: License [BSD 3-Clause "New" or "Revised" License](https://github.com/flutter/flutter/blob/master/LICENSE);
+* [supernova_flutter_ui_toolkit](https://pub.dev/packages/supernova_flutter_ui_toolkit): License [MIT](https://github.com/Supernova-Studio/flutter-ui-toolkit/blob/master/LICENSE);
+* [flare_flutter](https://pub.dev/packages/flare_flutter): License [MIT](https://github.com/2d-inc/Flare-Flutter/blob/master/LICENSE);
+* [path_provder](https://pub.dev/packages/path_provider): License [BDS](https://github.com/flutter/plugins/blob/master/packages/path_provider/LICENSE);
+* [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons): License [MIT](https://github.com/fluttercommunity/flutter_launcher_icons/blob/master/LICENSE);
 
 ## Reflection
 
