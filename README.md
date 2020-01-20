@@ -78,7 +78,7 @@ Bird flies in and stays for a minute. It’s animation sequence is not predefine
 
 The project depends on the following packages. The licensing for the packages can be found in the links below:
 
-* ![Intl](https://pub.dev/packages/intl): License ![BSD](https://github.com/dart-lang/intl/blob/master/LICENSE);
+* [Intl](https://pub.dev/packages/intl): License [BSD](https://github.com/dart-lang/intl/blob/master/LICENSE);
 
 ## Reflection
 
