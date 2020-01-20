@@ -4,7 +4,7 @@ Humanbeans Flutter Clock Challenge Submission
 
 ## Concept:
 
-![The clock with the rare bird comming from the right and sitting on a branch for 1 minute](https://humanbeans.dev/1_Bird_Visit1.png)
+![The clock with the rare bird comming from the right and sitting on a branch for 1 minute](https://humanbeans.dev/1_Bird_Visit1.gif)
 
 Bird visits Only once a day and stays for only one minute. You may not see it for weeks, sometimes you’ll only catch a glimpse of it flying away.
 
@@ -55,7 +55,7 @@ Playful characters worked better in a lot of cases we previously had problems wi
 
 Finally, the bird showing up needed to be a special occasion. We didn’t want it to go unnoticed – it is the one exception to our “no distraction” rule as our whole concept revolved around the bird being special.
 
-![The bird has glowing halo around it](https://humanbeans.dev/Bird_Glow.png)
+![The bird has glowing halo around it](https://humanbeans.dev/Bird_Glow.gif)
 
 We used Color Dodge blending mode to highlight the bird and create a glowing effect around it.
 
@@ -69,7 +69,7 @@ Each time a minute passes a leaf is torn and flies away.
 
 You can barely notice the branches moving.
 
-![The clock with the rare bird comming from the right and sitting on a branch for 1 minute](https://humanbeans.dev/1_Bird_Visit1.png)
+![The clock with the rare bird comming from the right and sitting on a branch for 1 minute](https://humanbeans.dev/1_Bird_Visit1.gif)
 
 Bird flies in and stays for a minute. It’s animation sequence is not predefined- it plays animations randomly. The bird can choose what to do next, making each time it appears a unique event.
 
