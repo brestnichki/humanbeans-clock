@@ -423,16 +423,6 @@ class _ClockState extends State<Clock>
     return nextBirdTime;
   }
 
-  // Method to reset the file
-  //
-  // Used for debugging
-  void _deleteFile() async {
-    final Directory directory = await getApplicationDocumentsDirectory();
-    final File file = File('${directory.path}/birdTime.txt');
-
-    await file.delete();
-  }
-
   // Load the images for the texture effect from the file system
   //
   // It may take some time so it's Future, that resolves with an [dart:ui.Image]
