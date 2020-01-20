@@ -34,38 +34,41 @@ So dark theme and pastel colors were the obvious choice.
 ![Grid showing warm and cold combinations of dart pastel colors](https://humanbeans.dev/4.png)
 
 We used Paul Gauguin’s (a favorite artist) paintings to gather initial colors to test. Gauguin’s colors are just perfect for our purposes as he created vivid color themes before humanity was able add light as a compound to color.
+
 We finally had a color theme we were happy with – not distracting if you’re not looking at it, but still readable, regardless of light intensity or screen lighting.
+
 Fonts were another great challenge. We soon found out all fonts we tested had similar problems – huge gaps opened up whenever the clock had to show numbers 1 and 7 and 4.
+
 We came up with the idea to displace the numbers, hoping the dynamic would compensate this, but still some number combinations created huge empty spaces that distorted the balance of the design:
 
 ![Rough design of the app with highlight of big space between narrow and thick numbers on a default font](https://humanbeans.dev/5.png)
 
 We knew we had to create our own font. We found using playful characters we could tilt the character stems – with each letter leaning in a different direction – empty spaces would not be as apparent:
 
-![Outline of the custom font](https://humanbeans.dev/5.png)
-![The custom font in the context of the app. The narrow characters are tilted to offset the problem with big spaces around them](https://humanbeans.dev/6.png)
+![Outline of the custom font](https://humanbeans.dev/6.png)
+![The custom font in the context of the app. The narrow characters are tilted to offset the problem with big spaces around them](https://humanbeans.dev/7.png)
 
 Playful characters worked better in a lot of cases we previously had problems with.
 
 Finally, the bird showing up needed to be a special occasion. We didn’t want it to go unnoticed – it is the one exception to our “no distraction” rule as our whole concept revolved around the bird being special.
 
-![Outline of the custom font](https://humanbeans.dev/5.png)
+![Outline of the custom font](https://humanbeans.dev/7.png)
 
 We used Color Dodge blending mode to highlight the bird and create a glowing effect around it.
 
-![Outline of the custom font](https://humanbeans.dev/5.png)
+![Outline of the custom font](https://humanbeans.dev/7.png)
 
 Animations:
 
-![Outline of the custom font](https://humanbeans.dev/5.png)
+![Outline of the custom font](https://humanbeans.dev/7.png)
 
 Each time a minute passes a leaf is torn and flies away.
 
-![Outline of the custom font](https://humanbeans.dev/5.png)
+![Outline of the custom font](https://humanbeans.dev/7.png)
 
 You can barely notice the branches moving.
 
-![Outline of the custom font](https://humanbeans.dev/5.png)
+![Outline of the custom font](https://humanbeans.dev/7.png)
 
 Bird flies in and stays for a minute. It’s animation sequence is not predefined- it plays animations randomly. The bird can choose what to do next, making each time it appears a unique event.
 
