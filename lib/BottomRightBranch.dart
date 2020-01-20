@@ -134,7 +134,7 @@ class BottomRightBranch extends StatelessWidget {
                           toRight: false,
                           offset: FractionalOffset(0.9, 1),
                           imageUri:
-                          'assets/images/Pngs_Flat_0011_F_Leaf_R_3.png',
+                              'assets/images/Pngs_Flat_0011_F_Leaf_R_3.png',
                           keyframes: <Keyframe<double>>[
                             Keyframe<double>(fraction: 0, value: 0),
                             Keyframe<double>(fraction: 0.9, value: 0.20),

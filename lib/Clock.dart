@@ -260,7 +260,7 @@ class _ClockState extends State<Clock>
 
       // Only play the [_clockAnimation] if app is in foregrond. Otherwise the
       // the [Ticker] gets interupted
-      if(_appInForeground){
+      if (_appInForeground) {
         // Reset and play the animation for the [ClockCounter] numbers.
         _clockAnimation.reset();
         _clockAnimation.forward().orCancel;
@@ -411,13 +411,13 @@ class _ClockState extends State<Clock>
     // Get the last midnight.
     //
     // We'll add a full day plus random time between 0 - 23 hours and 0 - 59 minutes
-    DateTime lastMidnightTime =
-        DateTime(now.year, now.month, now.day);
+    DateTime lastMidnightTime = DateTime(now.year, now.month, now.day);
 
     // Calculate random time during the next calendar day.
     //
     // We want to have a guarnateed one play for calendar day, to retain the
-    DateTime nextBirdTime = lastMidnightTime.add(Duration(days: 1, hours: Random().nextInt(24), minutes: Random().nextInt(60)));
+    DateTime nextBirdTime = lastMidnightTime.add(Duration(
+        days: 1, hours: Random().nextInt(24), minutes: Random().nextInt(60)));
 
     // Write the timestamp in the file
     await file.writeAsString(nextBirdTime.millisecondsSinceEpoch.toString());

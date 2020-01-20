@@ -53,19 +53,13 @@ class TopRightBranch extends StatelessWidget {
                     fit: StackFit.expand,
                     children: <Widget>[
                       Positioned(
-                        top: model
-                            .utils
-                            .scaleDimentions(37),
+                        top: model.utils.scaleDimentions(37),
                         right: ClockUiInheritedModel.of(context, 'size')
                             .utils
                             .scaleDimentions(162),
                         child: SizedBox(
-                          width: model
-                              .utils
-                              .scaleDimentions(201),
-                          height: model
-                              .utils
-                              .scaleDimentions(82),
+                          width: model.utils.scaleDimentions(201),
+                          height: model.utils.scaleDimentions(82),
                           child: Image.asset(
                               "assets/images/Pngs_Flat_0036_B_Br_Right_1.png",
                               fit: BoxFit.contain),

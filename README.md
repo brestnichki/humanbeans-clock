@@ -71,7 +71,7 @@ You can barely notice the branches moving.
 
 ![The clock with the rare bird comming from the right and sitting on a branch for 1 minute](https://humanbeans.dev/1_Bird_Visit1.gif)
 
-Bird flies in and stays for a minute. It’s animation sequence is not predefined- it plays animations randomly. The bird can choose what to do next, making each time it appears a unique event.
+Bird flies in and stays for a minute. Its animation sequence is not predefined- it plays animations randomly. The bird can choose what to do next, making each time it appears a unique event.
 
 ## Development
 
@@ -89,13 +89,13 @@ I strongly suspect there's a room for improvement in the "performance department
 The app uses InheritedModel to communicate changes in state to child widget, which allow us to avoid rebuilds for most of them, but keep all the logic for the animations, in the
 root widget of the app.
 
-For the accessability of the app we had some consideration. I have disabled font scaling for the time numbers, because i believe that the 159 (baseline) for the font should be 
+For the accessibility of the app we had some consideration. I have disabled font scaling for the time numbers, because i believe that the 159 (baseline) for the font should be 
 able to provide readability. The root of the app in the Clock widget we use ExclideSematics widgets to remove all the semantics for the decoration elements - the bird and the 
 branches/leaves. That also excludes the text for the clock time, but i wrapped everything in Semantics providing label for the current time.
 
 ### Dependancies and licensing
 
-The project is distributed under the [MIT License](https://github.com/brestnichki/humanbeans-clock/blob/master/LICENSE.md)
+The licensing of the project can be found in [LICENCE.md](https://github.com/brestnichki/humanbeans-clock/blob/master/LICENSE.md).
 
 The project depends on the following packages. The licensing for the packages can be found in the links below:
 
@@ -113,6 +113,6 @@ The project depends on the following packages. The licensing for the packages ca
 Milen – designer
 
 “Flutter is a great framework compared to my previous experience with android development. We were able to just start working on our idea and build on top of it as we moved along. A lot of things i struggled with before - animation orchestration and such was
-just a breaze ih Flutter”
+just a breeze in Flutter”
 
 Bobby - developer
