@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Humanbeans Clock',
+      title: 'Eventually',
       theme: null,
       home: Clock(),
       debugShowCheckedModeBanner: false,

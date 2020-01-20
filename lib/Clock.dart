@@ -225,6 +225,7 @@ class _ClockState extends State<Clock>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
     if (state == AppLifecycleState.paused) {
       // Remove the [_birdTime] value, so when the app is resumed,
       // there's no change, the [_birdControlls] animation starts before
@@ -235,6 +236,8 @@ class _ClockState extends State<Clock>
       _appInForeground = false;
     } else if (state == AppLifecycleState.resumed) {
       // Set the flag to allow [_activeAnimation] and [_clockAnimation] to play
+      _dateTime = DateTime.now();
+      _prevTime = _dateTime;
       _appInForeground = true;
       // Read [_birdTime] form the file system and assign it when the Future resolves
       _getBirdTime();

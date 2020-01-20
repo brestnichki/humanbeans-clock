@@ -1,8 +1,10 @@
-# clock
+# Eventually
 
 Humanbeans Flutter Clock Challenge Submission
 
 ## Concept:
+
+![The clock with the rare bird comming from the right and sitting on a branch for 1 minute](https://humanbeans.dev/1_Bird_Visit1.png)
 
 Bird visits Only once a day and stays for only one minute. You may not see it for weeks, sometimes you’ll only catch a glimpse of it flying away.
 
@@ -28,7 +30,8 @@ First step was testing the colors.
 
 ![Grid with multiple color combinations for the clock design](https://humanbeans.dev/3.png)
 
-We tested number of color combinations – each one individually on a phone screen in the middle of the room, walking around trying to imagine what it would feel like having this screen somewhere in your house. It was immediately apparent – as tempting as it was – we couldn’t really go with modern bright tones and Material Design palette. They work great for a screen you’re using at the moment but are too demanding for a clock face that you only want to know exists when you want to check the time.
+We tested a number of color combinations – each one individually on a phone screen in the middle of the room, walking around trying to imagine what it would feel like having this screen somewhere in your house. It was immediately apparent – as tempting as it was – we couldn’t really go with modern bright tones and Material Design palette. They work great for a screen you’re using at the moment but are too demanding for a clock face that you only want to know exists when you want to check the time.
+
 So dark theme and pastel colors were the obvious choice.
 
 ![Grid showing warm and cold combinations of dart pastel colors](https://humanbeans.dev/4.png)
@@ -52,27 +55,43 @@ Playful characters worked better in a lot of cases we previously had problems wi
 
 Finally, the bird showing up needed to be a special occasion. We didn’t want it to go unnoticed – it is the one exception to our “no distraction” rule as our whole concept revolved around the bird being special.
 
-![Outline of the custom font](https://humanbeans.dev/7.png)
+![The bird has glowing halo around it](https://humanbeans.dev/Bird_Glow.png)
 
 We used Color Dodge blending mode to highlight the bird and create a glowing effect around it.
 
-![Outline of the custom font](https://humanbeans.dev/7.png)
-
 Animations:
 
-![Outline of the custom font](https://humanbeans.dev/7.png)
+![Numbers of the clock changing and one leaf flying away](https://humanbeans.dev/2_Leaf_Torn.gif)
 
 Each time a minute passes a leaf is torn and flies away.
 
-![Outline of the custom font](https://humanbeans.dev/7.png)
+![Branches moving lightly as if blown by air](https://humanbeans.dev/3_Branches_Moving.gif)
 
 You can barely notice the branches moving.
 
-![Outline of the custom font](https://humanbeans.dev/7.png)
+![The clock with the rare bird comming from the right and sitting on a branch for 1 minute](https://humanbeans.dev/1_Bird_Visit1.png)
 
 Bird flies in and stays for a minute. It’s animation sequence is not predefined- it plays animations randomly. The bird can choose what to do next, making each time it appears a unique event.
 
 ## Development
+
+### Development
+
+The app is build as mush as possible for me without library widgets. The main exception being the bird animation, as it's more complex. For that we relied on Flare's animations.
+
+Another great help in both teaching myself about organizing animations was Supernova's package for flutter. The animation structure in the app is strongly infuenced by their work, 
+even though i created it for myself form start. 
+
+The overall performance of the framework is great, we have more around 30 moving elements on the screen during most of the time and we have achieved 40 fps on my Samsung S6 Active.
+
+I strongly suspect there's a room for improvement in the "performance department" but i could not find a way to do it. 
+
+The app uses InheritedModel to communicate changes in state to child widget, which allow us to avoid rebuilds for most of them, but keep all the logic for the animations, in the
+root widget of the app.
+
+For the accessability of the app we had some consideration. I have disabled font scaling for the time numbers, because i believe that the 159 (baseline) for the font should be 
+able to provide readability. The root of the app in the Clock widget we use ExclideSematics widgets to remove all the semantics for the decoration elements - the bird and the 
+branches/leaves. That also excludes the text for the clock time, but i wrapped everything in Semantics providing label for the current time.
 
 ### Dependancies and licensing
 
