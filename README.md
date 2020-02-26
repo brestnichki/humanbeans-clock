@@ -2,6 +2,8 @@
 
 Humanbeans Flutter Clock Challenge Submission
 
+by Boris Brestnichki (development) and Milen Trendafilov (design, concept)  
+
 ## Concept:
 
 ![The clock with the rare bird comming from the right and sitting on a branch for 1 minute](https://humanbeans.dev/1_Bird_Visit1.gif)
