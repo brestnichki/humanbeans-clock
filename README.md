@@ -2,7 +2,7 @@
 
 Humanbeans Flutter Clock Challenge Submission
 
-by Boris Brestnichki (development) and Milen Trendafilov (design, concept)  
+by Milen Trendafilov (design, concept) and Boris Brestnichki (development)
 
 ## Concept:
 
